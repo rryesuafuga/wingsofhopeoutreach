@@ -1,198 +1,15 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Heart, ChevronDown, Play } from 'lucide-react';
 import Button from '@/components/ui/Button';
 
 export default function HeroSection() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
-  }, []);
-
-  /* Animated particle system – dove silhouettes and hope sparkles */
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    let animationId: number;
-    const particles: Particle[] = [];
-    const doves: Dove[] = [];
-
-    interface Particle {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      opacity: number;
-      life: number;
-      maxLife: number;
-      color: string;
-    }
-
-    interface Dove {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      size: number;
-      opacity: number;
-      wingAngle: number;
-      wingSpeed: number;
-    }
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    const w = () => canvas.offsetWidth;
-    const h = () => canvas.offsetHeight;
-
-    // Create floating particles
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * w(),
-        y: Math.random() * h(),
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: -Math.random() * 0.5 - 0.2,
-        size: Math.random() * 3 + 1,
-        opacity: Math.random() * 0.5 + 0.1,
-        life: Math.random() * 200,
-        maxLife: 200 + Math.random() * 100,
-        color:
-          Math.random() > 0.5
-            ? 'rgba(158, 107, 90, '
-            : 'rgba(42, 125, 52, ',
-      });
-    }
-
-    // Create doves
-    for (let i = 0; i < 4; i++) {
-      doves.push({
-        x: Math.random() * w(),
-        y: Math.random() * h() * 0.5 + 50,
-        vx: (Math.random() - 0.3) * 1.5,
-        vy: Math.sin(Math.random() * Math.PI) * 0.3,
-        size: 15 + Math.random() * 10,
-        opacity: 0.15 + Math.random() * 0.15,
-        wingAngle: Math.random() * Math.PI * 2,
-        wingSpeed: 0.06 + Math.random() * 0.04,
-      });
-    }
-
-    const drawDove = (dove: Dove) => {
-      ctx.save();
-      ctx.translate(dove.x, dove.y);
-      ctx.globalAlpha = dove.opacity;
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
-      ctx.lineWidth = 1.5;
-      const s = dove.size;
-      const wingY = Math.sin(dove.wingAngle) * s * 0.5;
-
-      // Body
-      ctx.beginPath();
-      ctx.ellipse(0, 0, s * 0.6, s * 0.25, 0, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.stroke();
-
-      // Left wing
-      ctx.beginPath();
-      ctx.moveTo(-s * 0.2, 0);
-      ctx.quadraticCurveTo(-s * 0.6, -s * 0.3 + wingY, -s, wingY);
-      ctx.stroke();
-
-      // Right wing
-      ctx.beginPath();
-      ctx.moveTo(s * 0.2, 0);
-      ctx.quadraticCurveTo(s * 0.6, -s * 0.3 + wingY, s, wingY);
-      ctx.stroke();
-
-      // Head
-      ctx.beginPath();
-      ctx.arc(s * 0.5, -s * 0.1, s * 0.15, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.restore();
-    };
-
-    const animate = () => {
-      ctx.clearRect(0, 0, w(), h());
-
-      // Update and draw particles
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.life++;
-
-        if (p.life > p.maxLife || p.y < -10) {
-          p.x = Math.random() * w();
-          p.y = h() + 10;
-          p.life = 0;
-        }
-
-        const lifeRatio = 1 - p.life / p.maxLife;
-        const alpha = p.opacity * lifeRatio;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color + alpha + ')';
-        ctx.fill();
-      });
-
-      // Update and draw doves
-      doves.forEach((d) => {
-        d.x += d.vx;
-        d.y += d.vy + Math.sin(Date.now() * 0.001 + d.x) * 0.2;
-        d.wingAngle += d.wingSpeed;
-
-        if (d.x > w() + 50) d.x = -50;
-        if (d.x < -50) d.x = w() + 50;
-        if (d.y > h() * 0.6) d.vy = -Math.abs(d.vy);
-        if (d.y < 30) d.vy = Math.abs(d.vy);
-
-        drawDove(d);
-      });
-
-      // Connection lines between nearby particles
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(158, 107, 90, ${
-              0.05 * (1 - dist / 100)
-            })`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      }
-
-      animationId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resize);
-    };
   }, []);
 
   return (
@@ -200,13 +17,6 @@ export default function HeroSection() {
       {/* Background gradient */}
       <div className="absolute inset-0 gradient-hero" />
       <div className="absolute inset-0 pattern-grid opacity-20" />
-
-      {/* Animated canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        aria-hidden="true"
-      />
 
       {/* Decorative circles */}
       <div className="absolute top-1/4 -left-32 w-64 h-64 rounded-full bg-primary-500/10 blur-3xl" aria-hidden="true" />
