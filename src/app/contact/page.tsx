@@ -224,7 +224,7 @@ export default function ContactPage() {
                             type="tel"
                             {...register('phone')}
                             className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                            placeholder="+256 700 000 000"
+                            placeholder="+256 755 529 003"
                           />
                         </div>
                         <div>
@@ -284,7 +284,7 @@ export default function ContactPage() {
           <SectionHeading
             subtitle="Find Us"
             title="Our Location"
-            description="Visit our office in Wakiso, Kitala, Uganda."
+            description="P.O. BOX 702144, Entebbe, Uganda."
           />
           <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
             <div className="h-96 bg-primary-50 flex items-center justify-center relative">
@@ -295,10 +295,10 @@ export default function ContactPage() {
                   Wings of Hope Outreach
                 </h3>
                 <p className="text-slate-600">
-                  Wakiso, Kitala, Uganda
+                  P.O. BOX 702144, Entebbe, Uganda
                 </p>
                 <a
-                  href="https://www.google.com/maps/search/?api=1&query=Wakiso+Kitala+Uganda"
+                  href="https://www.google.com/maps/search/?api=1&query=Entebbe+Uganda"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 mt-4 text-primary-600 hover:text-primary-700 font-medium"

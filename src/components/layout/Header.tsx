@@ -47,7 +47,7 @@ export default function Header() {
       )}
     >
       <div className="container-custom">
-        <nav className="flex items-center justify-between h-16 md:h-20" aria-label="Main navigation">
+        <nav className="flex items-center justify-between h-20 md:h-24" aria-label="Main navigation">
           {/* Logo */}
           <Link
             href="/"
@@ -57,17 +57,14 @@ export default function Header() {
             <Image
               src="/WOHO.png"
               alt=""
-              width={48}
-              height={48}
-              className="h-10 w-10 md:h-12 md:w-12"
+              width={64}
+              height={64}
+              className="h-14 w-14 md:h-16 md:w-16"
               priority
             />
             <div className="hidden sm:block">
-              <div className="font-heading font-bold text-primary-800 text-base md:text-lg leading-tight">
-                Wings of Hope
-              </div>
-              <div className="text-xs text-primary-600 tracking-wide font-medium">
-                Outreach
+              <div className="font-heading font-bold text-primary-800 text-lg md:text-xl leading-tight">
+                Wings Of Hope Outreach
               </div>
             </div>
           </Link>
@@ -121,7 +118,7 @@ export default function Header() {
       <div
         id="mobile-menu"
         className={cn(
-          'lg:hidden fixed inset-x-0 top-16 bottom-0 bg-white/98 backdrop-blur-md z-40 transition-all duration-300',
+          'lg:hidden fixed inset-x-0 top-20 bottom-0 bg-white/98 backdrop-blur-md z-40 transition-all duration-300',
           isMenuOpen
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 -translate-y-4 pointer-events-none'

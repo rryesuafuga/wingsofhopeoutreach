@@ -148,7 +148,7 @@ export default function AboutPage() {
                   guidance.
                 </p>
                 <p>
-                  Based in <strong className="text-slate-800">Wakiso, Kitala, Uganda</strong>,
+                  Based in <strong className="text-slate-800">Entebbe, Uganda</strong>,
                   Wings of Hope Outreach operates across 18+ communities,
                   delivering 13 comprehensive programs that address the holistic
                   needs of the people we serve.
@@ -158,7 +158,7 @@ export default function AboutPage() {
               <div className="mt-8 grid grid-cols-2 gap-4">
                 {[
                   { icon: Calendar, label: 'Founded', value: 'June 2024' },
-                  { icon: MapPin, label: 'Location', value: 'Wakiso, Uganda' },
+                  { icon: MapPin, label: 'Location', value: 'Entebbe, Uganda' },
                   { icon: FileText, label: 'Reg. No.', value: '800346...' },
                   { icon: Target, label: 'Programs', value: '13 Active' },
                 ].map((item) => {

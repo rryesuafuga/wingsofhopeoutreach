@@ -66,10 +66,7 @@ export default function Footer() {
                 />
                 <div>
                   <div className="font-heading font-bold text-white text-lg">
-                    Wings of Hope
-                  </div>
-                  <div className="text-xs text-primary-400 tracking-wider">
-                    Outreach
+                    Wings Of Hope Outreach
                   </div>
                 </div>
               </div>

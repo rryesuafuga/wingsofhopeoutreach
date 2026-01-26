@@ -144,7 +144,7 @@ export default function ProgramsPage() {
       </section>
 
       {/* Quick Navigation */}
-      <section className="py-8 bg-white border-b border-slate-100 sticky top-16 md:top-20 z-30" aria-label="Program navigation">
+      <section className="py-8 bg-white border-b border-slate-100 sticky top-20 md:top-24 z-30" aria-label="Program navigation">
         <div className="container-custom">
           <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
             {PROGRAMS.map((program) => (

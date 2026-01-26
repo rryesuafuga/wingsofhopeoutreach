@@ -4,9 +4,10 @@ export const SITE_CONFIG = {
   description:
     'Wings of Hope Outreach Limited is a Uganda-based organization dedicated to supporting vulnerable children, youth, and communities through education, healthcare, economic empowerment, and spiritual development.',
   url: 'https://wingsofhopeoutreach.org',
-  email: 'info@wingsofhopeoutreach.org',
-  phone: '+256 700 000 000',
-  address: 'Wakiso, Kitala, Uganda',
+  founder: 'Hannah Gabula',
+  email: 'wingsofhopeoutreachug@gmail.com',
+  phone: '+256 755 529 003',
+  address: 'P.O. BOX 702144, Entebbe, Uganda',
   registration: '80034655477699',
   incorporationDate: 'June 11, 2024',
   social: {
@@ -268,10 +269,10 @@ export const TIMELINE_EVENTS = [
 
 export const LEADERSHIP = [
   {
-    name: 'Gabula Hannah',
-    role: 'Director & Co-Founder',
-    bio: 'A passionate leader and businesswoman from Wakiso, Hannah founded Wings of Hope Outreach with a vision to transform lives through holistic community development programs.',
-    location: 'Wakiso, Kitala, Uganda',
+    name: 'Hannah Gabula',
+    role: 'Founder',
+    bio: 'A passionate leader and businesswoman, Hannah founded Wings of Hope Outreach with a vision to transform lives through holistic community development programs.',
+    location: 'Entebbe, Uganda',
   },
   {
     name: 'Kitimbo Shellor Sarah',

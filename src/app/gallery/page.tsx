@@ -59,7 +59,7 @@ export default function GalleryPage() {
       </section>
 
       {/* Filter */}
-      <section className="py-6 bg-white border-b border-slate-100 sticky top-16 md:top-20 z-30" aria-label="Gallery filters">
+      <section className="py-6 bg-white border-b border-slate-100 sticky top-20 md:top-24 z-30" aria-label="Gallery filters">
         <div className="container-custom">
           <div className="flex items-center gap-3 overflow-x-auto pb-2">
             <Filter className="w-4 h-4 text-slate-400 shrink-0" aria-hidden="true" />
