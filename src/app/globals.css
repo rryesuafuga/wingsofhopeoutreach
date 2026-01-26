@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-body text-slate-800 bg-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
+
+  h1 { @apply text-4xl md:text-5xl; }
+  h2 { @apply text-3xl md:text-4xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+
+  ::selection {
+    @apply bg-primary-200 text-primary-900;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .gradient-primary {
+    @apply bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900;
+  }
+
+  .gradient-warm {
+    @apply bg-gradient-to-br from-secondary-400 via-secondary-500 to-secondary-600;
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, #042f2e 0%, #134e4a 25%, #0f766e 50%, #115e59 75%, #042f2e 100%);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-400;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+  }
+
+  .glass-effect {
+    @apply bg-white/80 backdrop-blur-md border border-white/20;
+  }
+
+  .pattern-dots {
+    background-image: radial-gradient(circle, #14b8a6 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .pattern-grid {
+    background-image:
+      linear-gradient(rgba(20, 184, 166, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(20, 184, 166, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+}
+
+@layer utilities {
+  .animate-in {
+    animation: animateIn 0.6s ease-out both;
+  }
+
+  @keyframes animateIn {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
+}
+
+/* D3.js visualization styles */
+.d3-tooltip {
+  position: absolute;
+  padding: 8px 12px;
+  background: rgba(15, 23, 42, 0.92);
+  color: #f8fafc;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  pointer-events: none;
+  z-index: 100;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  backdrop-filter: blur(4px);
+  max-width: 240px;
+  line-height: 1.4;
+}
+
+.d3-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid rgba(15, 23, 42, 0.92);
+}
+
+/* Sankey diagram */
+.sankey-link {
+  fill: none;
+  stroke-opacity: 0.3;
+  transition: stroke-opacity 0.3s ease;
+}
+.sankey-link:hover {
+  stroke-opacity: 0.6;
+}
+
+.sankey-node rect {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.sankey-node rect:hover {
+  opacity: 0.85;
+}
+
+/* Program wheel */
+.program-wheel-arc {
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.program-wheel-arc:hover {
+  opacity: 0.85;
+}
+
+/* Impact timeline */
+.timeline-dot {
+  cursor: pointer;
+  transition: r 0.3s ease, fill 0.3s ease;
+}
+.timeline-dot:hover {
+  r: 10;
+}
+
+/* Leaflet map overrides */
+.leaflet-container {
+  z-index: 1;
+  border-radius: 12px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-100;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-400 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-600;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
