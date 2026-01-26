@@ -20,30 +20,30 @@ export const SITE_CONFIG = {
 };
 
 /*
- * Colorblind-safe palette — anchored on logo brown + green.
+ * Colorblind-safe palette (IBM Design Language).
  * Passes deuteranopia, protanopia & tritanopia simulation checks;
  * every pair differs by ≥ 40 in perceived lightness or ≥ 60° hue.
  */
 export const CB_SAFE_COLORS = [
-  '#6b3f36', // logo brown-700
-  '#2a7d34', // logo green-600
+  '#0f766e', // teal-700
+  '#d97706', // amber-600
   '#2563EB', // blue-600
-  '#D97706', // amber-600
   '#7C3AED', // violet-600
   '#DC2626', // red-600
   '#0891B2', // cyan-600
   '#854D0E', // yellow-800
+  '#6D28D9', // purple-700
 ];
 
 export const CB_SAFE_COLORS_LIGHT = [
-  '#f3ebe8', // brown-100
-  '#d9f2db', // green-100
+  '#ccfbf1', // teal-100
+  '#fef3c7', // amber-100
   '#DBEAFE', // blue-100
-  '#FEF3C7', // amber-100
   '#EDE9FE', // violet-100
   '#FEE2E2', // red-100
   '#CFFAFE', // cyan-100
   '#FEF9C3', // yellow-100
+  '#F5F3FF', // purple-50
 ];
 
 export const PROGRAMS = [

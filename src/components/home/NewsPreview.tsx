@@ -40,9 +40,9 @@ export default function NewsPreview() {
                   className="absolute inset-0"
                   style={{
                     background: `linear-gradient(135deg, ${
-                      ['#6b3f36', '#2a7d34', '#2563EB'][i]
+                      ['#0f766e', '#d97706', '#7c3aed'][i]
                     }22 0%, ${
-                      ['#6b3f36', '#2a7d34', '#2563EB'][i]
+                      ['#0f766e', '#d97706', '#7c3aed'][i]
                     }44 100%)`,
                   }}
                 />

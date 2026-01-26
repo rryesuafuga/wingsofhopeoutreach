@@ -69,7 +69,7 @@ export default function ImpactTimeline() {
       .attr('x2', margin.left)
       .attr('y1', yBaseline)
       .attr('y2', yBaseline)
-      .attr('stroke', '#6b3f36')
+      .attr('stroke', '#14b8a6')
       .attr('stroke-width', 3)
       .attr('stroke-linecap', 'round')
       .transition()

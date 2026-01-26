@@ -55,7 +55,7 @@ export default function CommunityMap() {
       .append('rect')
       .attr('width', width)
       .attr('height', height)
-      .attr('fill', '#faf6f5')
+      .attr('fill', '#f0fdfa')
       .attr('rx', 12);
 
     // Grid lines for reference
@@ -66,7 +66,7 @@ export default function CommunityMap() {
         .attr('x2', width)
         .attr('y1', (height / 20) * i)
         .attr('y2', (height / 20) * i)
-        .attr('stroke', '#e5d4ce')
+        .attr('stroke', '#99f6e4')
         .attr('stroke-width', 0.5);
       svg
         .append('line')
@@ -74,7 +74,7 @@ export default function CommunityMap() {
         .attr('x2', (width / 20) * i)
         .attr('y1', 0)
         .attr('y2', height)
-        .attr('stroke', '#e5d4ce')
+        .attr('stroke', '#99f6e4')
         .attr('stroke-width', 0.5);
     }
 
@@ -85,7 +85,7 @@ export default function CommunityMap() {
       .attr('y', 30)
       .style('font-size', '14px')
       .style('font-weight', '700')
-      .style('fill', '#54302a')
+      .style('fill', '#0f766e')
       .text('Communities We Serve');
 
     svg
@@ -158,7 +158,7 @@ export default function CommunityMap() {
               .attr('y1', p1[1])
               .attr('x2', p2[0])
               .attr('y2', p2[1])
-              .attr('stroke', '#d4b5ab')
+              .attr('stroke', '#5eead4')
               .attr('stroke-width', 1)
               .attr('stroke-dasharray', '4,4')
               .attr('opacity', 0.4);

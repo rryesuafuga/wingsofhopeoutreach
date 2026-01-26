@@ -268,7 +268,7 @@ export default function SankeyDiagram() {
           .attr('text-anchor', 'middle')
           .style('font-size', '12px')
           .style('font-weight', '700')
-          .style('fill', '#54302a')
+          .style('fill', '#0f766e')
           .style('text-transform', 'uppercase')
           .style('letter-spacing', '0.1em')
           .text(columnLabels[ci]);
