@@ -72,8 +72,8 @@ export default function HeroSection() {
         maxLife: 200 + Math.random() * 100,
         color:
           Math.random() > 0.5
-            ? 'rgba(20, 184, 166, '
-            : 'rgba(245, 158, 11, ',
+            ? 'rgba(158, 107, 90, '
+            : 'rgba(42, 125, 52, ',
       });
     }
 
@@ -175,7 +175,7 @@ export default function HeroSection() {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(20, 184, 166, ${
+            ctx.strokeStyle = `rgba(158, 107, 90, ${
               0.05 * (1 - dist / 100)
             })`;
             ctx.lineWidth = 0.5;

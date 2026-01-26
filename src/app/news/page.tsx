@@ -19,7 +19,7 @@ const categories = [
 
 const categoryColors: Record<string, string> = {
   Healthcare: '#D97706',
-  Education: '#0F766E',
+  Education: '#6b3f36',
   'Economic Empowerment': '#7C3AED',
   'Foster Care': '#DC2626',
   Agriculture: '#DB2777',
@@ -123,9 +123,9 @@ export default function NewsPage() {
                       className="absolute inset-0"
                       style={{
                         background: `linear-gradient(135deg, ${
-                          categoryColors[article.category] || '#0F766E'
+                          categoryColors[article.category] || '#6b3f36'
                         }22 0%, ${
-                          categoryColors[article.category] || '#0F766E'
+                          categoryColors[article.category] || '#6b3f36'
                         }44 100%)`,
                       }}
                     />
@@ -134,7 +134,7 @@ export default function NewsPage() {
                       <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
                         <Tag
                           className="w-10 h-10"
-                          style={{ color: categoryColors[article.category] || '#0F766E' }}
+                          style={{ color: categoryColors[article.category] || '#6b3f36' }}
                           aria-hidden="true"
                         />
                       </div>
@@ -143,7 +143,7 @@ export default function NewsPage() {
                       <span
                         className="text-xs font-bold tracking-wider uppercase px-3 py-1.5 rounded-full"
                         style={{
-                          backgroundColor: categoryColors[article.category] || '#0F766E',
+                          backgroundColor: categoryColors[article.category] || '#6b3f36',
                           color: 'white',
                         }}
                       >

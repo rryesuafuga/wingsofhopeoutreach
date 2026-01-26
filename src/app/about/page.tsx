@@ -105,7 +105,7 @@ export default function AboutPage() {
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary-100 to-secondary-100" />
                 <div className="absolute inset-4 rounded-2xl bg-white shadow-xl flex items-center justify-center p-8">
                   <Image
-                    src="/WOHO.svg"
+                    src="/WOHO.png"
                     alt="Wings of Hope Outreach logo — a cross with a dove carrying an olive branch"
                     width={300}
                     height={300}

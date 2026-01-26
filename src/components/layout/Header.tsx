@@ -55,7 +55,7 @@ export default function Header() {
             aria-label={`${SITE_CONFIG.name} - Home`}
           >
             <Image
-              src="/WOHO.svg"
+              src="/WOHO.png"
               alt=""
               width={48}
               height={48}

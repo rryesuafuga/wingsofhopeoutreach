@@ -58,7 +58,7 @@ export default function Footer() {
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3 mb-6">
                 <Image
-                  src="/WOHO.svg"
+                  src="/WOHO.png"
                   alt=""
                   width={40}
                   height={40}
