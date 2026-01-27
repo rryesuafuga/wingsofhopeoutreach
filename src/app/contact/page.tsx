@@ -9,6 +9,8 @@ import {
   Clock,
   Send,
   CheckCircle2,
+  AlertCircle,
+  Loader2,
   Facebook,
   Twitter,
   Instagram,
@@ -28,17 +30,58 @@ interface ContactFormData {
   message: string;
 }
 
+function encode(data: Record<string, string>) {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .join('&');
+}
+
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<ContactFormData>();
 
-  const onSubmit = () => {
-    setSubmitted(true);
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encode({
+          'form-name': 'contact',
+          name: data.name,
+          email: data.email,
+          phone: data.phone || '',
+          subject: data.subject,
+          message: data.message,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        reset();
+      } else {
+        setSubmitError(
+          'Failed to send message. Please try again or email us directly.'
+        );
+      }
+    } catch {
+      setSubmitError(
+        'Network error. Please try again later or email us directly at ' +
+          SITE_CONFIG.email
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -182,7 +225,29 @@ export default function ContactPage() {
                     <h3 className="text-2xl font-heading font-bold text-slate-900 mb-6">
                       Send Us a Message
                     </h3>
-                    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+
+                    {submitError && (
+                      <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+                        <AlertCircle className="w-5 h-5 text-red-500 shrink-0 mt-0.5" aria-hidden="true" />
+                        <p className="text-red-700 text-sm">{submitError}</p>
+                      </div>
+                    )}
+
+                    <form
+                      name="contact"
+                      method="POST"
+                      data-netlify="true"
+                      netlify-honeypot="bot-field"
+                      onSubmit={handleSubmit(onSubmit)}
+                      className="space-y-5"
+                    >
+                      <input type="hidden" name="form-name" value="contact" />
+                      <p className="hidden">
+                        <label>
+                          Do not fill this out: <input name="bot-field" />
+                        </label>
+                      </p>
+
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                           <label htmlFor="contact-name" className="block text-sm font-medium text-slate-700 mb-1">
@@ -237,13 +302,13 @@ export default function ContactPage() {
                             className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                           >
                             <option value="">Select a subject</option>
-                            <option value="general">General Inquiry</option>
-                            <option value="donation">Donation</option>
-                            <option value="volunteer">Volunteering</option>
-                            <option value="partnership">Partnership</option>
-                            <option value="sponsorship">Child Sponsorship</option>
-                            <option value="media">Media & Press</option>
-                            <option value="other">Other</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Donation">Donation</option>
+                            <option value="Volunteering">Volunteering</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Child Sponsorship">Child Sponsorship</option>
+                            <option value="Media & Press">Media & Press</option>
+                            <option value="Other">Other</option>
                           </select>
                           {errors.subject && (
                             <p className="text-red-500 text-sm mt-1">{errors.subject.message}</p>
@@ -265,9 +330,23 @@ export default function ContactPage() {
                           <p className="text-red-500 text-sm mt-1">{errors.message.message}</p>
                         )}
                       </div>
-                      <Button type="submit" size="lg" className="gap-2">
-                        <Send className="w-5 h-5" aria-hidden="true" />
-                        Send Message
+                      <Button
+                        type="submit"
+                        size="lg"
+                        className="gap-2"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-5 h-5" aria-hidden="true" />
+                            Send Message
+                          </>
+                        )}
                       </Button>
                     </form>
                   </>
