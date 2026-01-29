@@ -30,11 +30,7 @@ interface ContactFormData {
   message: string;
 }
 
-function encode(data: Record<string, string>) {
-  return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
-    .join('&');
-}
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY;
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
@@ -53,20 +49,24 @@ export default function ContactPage() {
     setSubmitError('');
 
     try {
-      const response = await fetch('/', {
+      const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({
-          'form-name': 'contact',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Contact Form: ${data.subject}`,
+          from_name: data.name,
           name: data.name,
           email: data.email,
-          phone: data.phone || '',
-          subject: data.subject,
+          phone: data.phone || 'Not provided',
+          topic: data.subject,
           message: data.message,
         }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
         setSubmitted(true);
         reset();
       } else {
@@ -234,20 +234,9 @@ export default function ContactPage() {
                     )}
 
                     <form
-                      name="contact"
-                      method="POST"
-                      data-netlify="true"
-                      netlify-honeypot="bot-field"
                       onSubmit={handleSubmit(onSubmit)}
                       className="space-y-5"
                     >
-                      <input type="hidden" name="form-name" value="contact" />
-                      <p className="hidden">
-                        <label>
-                          Do not fill this out: <input name="bot-field" />
-                        </label>
-                      </p>
-
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div>
                           <label htmlFor="contact-name" className="block text-sm font-medium text-slate-700 mb-1">
